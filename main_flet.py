@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "Spelling Bee Helper"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.START
     page.window_center()
     page.window_width = 700
     page.window_height = 700
@@ -32,7 +32,7 @@ def main(page: ft.Page):
         
     # Text box for user input
     user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed, on_submit=submit_click)
-    user_input_letters
+    
 
 
     # Button to submit user input
@@ -43,4 +43,6 @@ def main(page: ft.Page):
     
     page.add(user_input_letters, submit_button,t)
 
+# Run the app in a web browser by adding the following line:
+# ft.app(target=main, view=ft.WEB_BROWSER)
 ft.app(target=main)
