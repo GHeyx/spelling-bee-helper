@@ -15,11 +15,13 @@ def main(page: ft.Page):
     # Submit Button clickable only when 7 characters are entered
     def text_changed(e):
         count = len(e.control.value)
-        t.value = e.control.value
+        remaining = 7 - count
+        t.value = (f"Letters Remaining:  {remaining} ")
         if count==7:
             submit_button.disabled = False
             submit_button.bgcolor = "BLUE"
             submit_button.text = "Submit"
+            t.value = ("Ready to Submit!")
         else:
             submit_button.disabled = True
             submit_button.bgcolor = "WHITE"
