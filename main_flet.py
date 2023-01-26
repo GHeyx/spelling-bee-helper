@@ -7,9 +7,11 @@ def main(page: ft.Page):
     page.window_center()
     page.window_width = 700
     page.window_height = 700
+    page.padding = 50
     
     # Title of page in center
     def submit_click(e):
+        t.value = ("You clicked the button!")
         page.update()
     
     # Submit Button clickable only when 7 characters are entered
@@ -29,7 +31,8 @@ def main(page: ft.Page):
         page.update()
         
     # Text box for user input
-    user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed)
+    user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed, on_submit=submit_click)
+    user_input_letters
 
 
     # Button to submit user input
