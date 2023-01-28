@@ -7,7 +7,7 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.START
     page.window_center()
     page.window_width = 700
-    page.window_height = 700
+    page.window_height = 900
     page.padding = 50
     
     # Title of page in center
@@ -41,6 +41,10 @@ def main(page: ft.Page):
     # Text box for user input
     user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed, on_submit=submit_click, max_length=7)
     
+    answers = ft.ListView(width=1000, height=800,expand=True)
+    for i in range(50):
+        answers.controls.append(ft.Text(f"Line {i}"))
+    
     
 
     # Button to submit user input
@@ -49,7 +53,7 @@ def main(page: ft.Page):
     t = ft.Text()
 
     
-    page.add(user_input_letters, submit_button,t)
+    page.add(user_input_letters, submit_button,t, answers)
 
 # Run the app in a web browser by adding the following line:
 # ft.app(target=main, view=ft.WEB_BROWSER)
