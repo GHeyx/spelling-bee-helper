@@ -13,6 +13,7 @@ def main(page: ft.Page):
     # Title of page in center
     def submit_click(e):
         t.value = ("You clicked the button!")
+        find_words(user_input_letters.value)
         page.update()
     
     # Submit Button clickable only when 7 characters are entered
@@ -30,6 +31,24 @@ def main(page: ft.Page):
             submit_button.bgcolor = "WHITE"
             submit_button.text = " "
         page.update()
+    
+    def reset_click(e):
+        pass
+        # user_input_letters.value = ""
+        # t.value = ("")
+        # submit_button.disabled = True
+        # submit_button.bgcolor = "WHITE"
+        # submit_button.text = " "
+        # page.update()
+    
+    def find_words(word):
+        with open('robust.txt') as file:
+            text = file.read()
+        words_in_text = text.split()
+        if word in words_in_text:
+            return True
+        else:
+            return False
     
     # Automatically move to next text box when 1 character is entered
     def next_field(e):
@@ -49,11 +68,13 @@ def main(page: ft.Page):
 
     # Button to submit user input
     submit_button = ft.FloatingActionButton(text=" ", width=100, bgcolor="WHITE",height=50, disabled=True, on_click=submit_click)
+    # Button to reset user input and the list of words
+    reset_button = ft.FloatingActionButton(text="Reset", width=100, bgcolor="BLUE",height=50, on_click=reset_click)
 
     t = ft.Text()
 
     
-    page.add(user_input_letters, submit_button,t, answers)
+    page.add(user_input_letters, submit_button,t, answers, reset_button)
 
 # Run the app in a web browser by adding the following line:
 # ft.app(target=main, view=ft.WEB_BROWSER)
