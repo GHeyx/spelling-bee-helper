@@ -67,14 +67,18 @@ def main(page: ft.Page):
     
 
     # Button to submit user input
-    submit_button = ft.FloatingActionButton(text=" ", width=100, bgcolor="WHITE",height=50, disabled=True, on_click=submit_click)
+    submit_button = ft.FloatingActionButton(text=" ", width=100, bgcolor="WHITE",height=50, disabled=True, on_click=submit_click,icon=ft.icons.CHECK)
     # Button to reset user input and the list of words
-    reset_button = ft.FloatingActionButton(text="Reset", width=100, bgcolor="BLUE",height=50, on_click=reset_click)
+    reset_button = ft.FloatingActionButton(text="Reset", width=100, bgcolor="BLUE",height=50, on_click=reset_click, icon=ft.icons.RESTORE)
 
+    bottom_buttons = ft.Row(controls =
+        [reset_button,submit_button], alignment=ft.MainAxisAlignment.SPACE_EVENLY)
+
+    
     t = ft.Text()
 
     
-    page.add(user_input_letters, submit_button,t, answers, reset_button)
+    page.add(user_input_letters, t, answers, bottom_buttons)
 
 # Run the app in a web browser by adding the following line:
 # ft.app(target=main, view=ft.WEB_BROWSER)
