@@ -1,4 +1,5 @@
 # This is a web-version of the spelling bee helper built using Flet 
+import this
 import flet as ft
 
 def main(page: ft.Page):
@@ -29,11 +30,18 @@ def main(page: ft.Page):
             submit_button.bgcolor = "WHITE"
             submit_button.text = " "
         page.update()
+    
+    # Automatically move to next text box when 1 character is entered
+    def next_field(e):
+        if len(e.control.value) == 1:
+            e.control.next.focus()
+        else:
+            e.control.focus()
         
     # Text box for user input
-    user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed, on_submit=submit_click)
+    user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed, on_submit=submit_click, max_length=7)
     
-
+    
 
     # Button to submit user input
     submit_button = ft.FloatingActionButton(text=" ", width=100, bgcolor="WHITE",height=50, disabled=True, on_click=submit_click)
