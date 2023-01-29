@@ -80,6 +80,9 @@ def main(page: ft.Page):
     # Text box for user input
     user_input_letters = ft.TextField(label="Begin Here", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=400, on_change=text_changed, on_submit=submit_click, max_length=7, content_padding=25, text_align=ft.TextAlign.CENTER)
     
+    # Container type Row for text box
+    e1 = ft.Row(controls=[user_input_letters], alignment=ft.MainAxisAlignment.CENTER, expand=0)
+    
     
     # Instructions text
     c = ft.Column(controls=[
@@ -104,10 +107,11 @@ def main(page: ft.Page):
         [reset_button,submit_button], alignment=ft.MainAxisAlignment.SPACE_EVENLY)
 
     # Text to be displayed above the list of words
-    t = ft.Text(size=20, style=ft.TextThemeStyle.LABEL_MEDIUM, expand=0, text_align=ft.TextAlign.CENTER)
+    t = ft.Text(size=16, style=ft.TextThemeStyle.LABEL_MEDIUM,color=gray)
+    t_row = ft.Row(controls=[t], alignment=ft.MainAxisAlignment.CENTER, expand=0)
 
     
-    page.add(c, user_input_letters, t, answers_list_view, bottom_buttons)
+    page.add(c, e1, t_row, answers_list_view, bottom_buttons)
 
 # Run the app in a web browser by adding the following line:
 # ft.app(target=main, view=ft.WEB_BROWSER)
