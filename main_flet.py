@@ -4,10 +4,10 @@ import flet as ft
 def main(page: ft.Page):
     # Title of page in center
     page.title = "Spelling Bee Helper"
-    page.vertical_alignment = ft.MainAxisAlignment.START
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window_center()
-    page.window_width = 700
-    page.window_height = 900
+    page.window_width = 650
+    page.window_height = 800
     page.padding = 50
     
     gray = "#C8C8C6"
@@ -17,10 +17,14 @@ def main(page: ft.Page):
     def submit_click(e):
         entry1_value = user_input_letters.value.lower()
         answers = find_words(entry1_value)
-        t.value = (f"Here's what I found, " + str(len(answers)) + " words: ")
+        amount_of_words = (len(answers))
+        if amount_of_words == 0:
+            t.value = ("No words found.")
+        else:
+            t.value = (f"Here's what I found, " + str(amount_of_words) + " words: ")
         
         for i in sorted(answers):
-            answers_list_view.controls.append(ft.Text(" " + i, size=20, style=ft.TextThemeStyle.LABEL_MEDIUM))
+            answers_list_view.controls.append(ft.Text(" " + i, size=20, style=ft.TextThemeStyle.LABEL_MEDIUM,selectable=True, text_align=ft.TextAlign.CENTER))
             page.update()
         
         
@@ -35,13 +39,10 @@ def main(page: ft.Page):
         if count==7:
             submit_button.disabled = False
             submit_button.bgcolor = ready_to_submit_color
-            submit_button.text = "Submit"
-            submit_button.color = "BLACK"
-            t.value = ("Ready to Submit!")
+            t.value = ("Ready to Submit! Hit Enter or click the button.")
         else:
             submit_button.disabled = True
             submit_button.bgcolor = gray
-            submit_button.text = " "
         page.update()
     
     def reset_click(e):
@@ -49,8 +50,8 @@ def main(page: ft.Page):
         t.value = ("")
         submit_button.disabled = True
         submit_button.bgcolor = "#C8C8C6"
-        submit_button.text = " "
         answers_list_view.controls.clear()
+        user_input_letters.focus()
         page.update()
     
     # Find words in the dictionary that contain the given letters
@@ -77,17 +78,24 @@ def main(page: ft.Page):
             e.control.focus()
         
     # Text box for user input
-    user_input_letters = ft.TextField(label="Begin Here", hint_text="Enter 7 letters beginning with the center letter", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS ,width=1000, on_change=text_changed, on_submit=submit_click, max_length=7)
+    user_input_letters = ft.TextField(label="Begin Here", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=400, on_change=text_changed, on_submit=submit_click, max_length=7, content_padding=25, text_align=ft.TextAlign.CENTER)
+    
+    
+    # Instructions text
+    c = ft.Column(controls=[
+        ft.Text("Enter 7 letters beginning with the center letter.", text_align=ft.TextAlign.CENTER, size=16, style=ft.TextThemeStyle.LABEL_SMALL,color=gray)],horizontal_alignment=ft.CrossAxisAlignment.STRETCH,expand=0)
+    # horizontal_alignment=ft.CrossAxisAlignment.END,
+    # alignment=ft.MainAxisAlignment.END,
+
+    
     
     # List of words that contain the given letters to be displayed
-    answers_list_view = ft.ListView(width=1000, height=800,expand=True)
+    answers_list_view = ft.ListView(width=400, height=800,expand=True,
+    )
     
     
-    
-    
-
     # Button to submit user input
-    submit_button = ft.FloatingActionButton(text=" ", width=100,bgcolor=gray, height=50, disabled=True, on_click=submit_click,icon=ft.icons.UPCOMING)
+    submit_button = ft.FloatingActionButton(text="Submit", width=100,bgcolor=gray, height=50, disabled=True, on_click=submit_click,icon=ft.icons.UPCOMING)
     # Button to reset user input and the list of words
     reset_button = ft.FloatingActionButton(text="Reset", width=100, bgcolor="BLUE",height=50, on_click=reset_click, icon=ft.icons.RESTORE)
 
@@ -95,11 +103,11 @@ def main(page: ft.Page):
     bottom_buttons = ft.Row(controls =
         [reset_button,submit_button], alignment=ft.MainAxisAlignment.SPACE_EVENLY)
 
-    
-    t = ft.Text()
+    # Text to be displayed above the list of words
+    t = ft.Text(size=20, style=ft.TextThemeStyle.LABEL_MEDIUM, expand=0, text_align=ft.TextAlign.CENTER)
 
     
-    page.add(user_input_letters, t, answers_list_view, bottom_buttons)
+    page.add(c, user_input_letters, t, answers_list_view, bottom_buttons)
 
 # Run the app in a web browser by adding the following line:
 # ft.app(target=main, view=ft.WEB_BROWSER)
