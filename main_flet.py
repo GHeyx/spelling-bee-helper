@@ -2,6 +2,7 @@
 import flet as ft
 
 def main(page: ft.Page):
+    # Title of page in center
     page.title = "Spelling Bee Helper"
     page.vertical_alignment = ft.MainAxisAlignment.START
     page.window_center()
@@ -12,15 +13,14 @@ def main(page: ft.Page):
     gray = "#C8C8C6"
     ready_to_submit_color = "#8d7709"
     
-    # Title of page in center
+    
     def submit_click(e):
         entry1_value = user_input_letters.value.lower()
-        t.value = ("You clicked the button!")
         answers = find_words(entry1_value)
-        answers_list_view.controls.append(ft.Text("Total Words: " + str(len(answers))))
+        t.value = (f"Here's what I found, " + str(len(answers)) + " words: ")
         
         for i in sorted(answers):
-            answers_list_view.controls.append(ft.Text(" " + i))
+            answers_list_view.controls.append(ft.Text(" " + i, size=20, style=ft.TextThemeStyle.LABEL_MEDIUM))
             page.update()
         
         
