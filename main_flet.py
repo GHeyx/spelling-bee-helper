@@ -4,10 +4,10 @@ import flet as ft
 def main(page: ft.Page):
     # Title of page in center
     page.title = "Spelling Bee Helper"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.SPACE_AROUND
     page.window_center()
-    page.window_width = 650
-    page.window_height = 800
+    page.window_width = 700
+    page.window_height = 1000
     page.padding = 50
     
     gray = "#C8C8C6"
