@@ -24,7 +24,7 @@ def main(page: ft.Page):
             t.value = (f"Here's what I found, " + str(amount_of_words) + " words: ")
         
         for i in sorted(answers):
-            answers_list_view.controls.append(ft.Text(" " + i, size=20, style=ft.TextThemeStyle.LABEL_MEDIUM,selectable=True, text_align=ft.TextAlign.CENTER))
+            answers_list_view.controls.append(ft.Text(" " + i, size=20, style=ft.TextThemeStyle.LABEL_MEDIUM))
             page.update()
         
         
@@ -93,25 +93,26 @@ def main(page: ft.Page):
     
     
     # List of words that contain the given letters to be displayed
-    answers_list_view = ft.ListView(width=400, height=800,expand=True,
-    )
+    answers_list_view = ft.ListView(width=400, height=400)
+    # Container of type row for list of words
+    alv_row = ft.Row(controls=[answers_list_view], alignment=ft.MainAxisAlignment.CENTER, expand=0)
     
     
     # Button to submit user input
-    submit_button = ft.FloatingActionButton(text="Submit", width=100,bgcolor=gray, height=50, disabled=True, on_click=submit_click,icon=ft.icons.UPCOMING)
+    submit_button = ft.FloatingActionButton(text="Submit", width=150,expand=0, bgcolor=gray, height=50, disabled=True, on_click=submit_click,icon=ft.icons.UPCOMING)
     # Button to reset user input and the list of words
-    reset_button = ft.FloatingActionButton(text="Reset", width=100, bgcolor="BLUE",height=50, on_click=reset_click, icon=ft.icons.RESTORE)
+    reset_button = ft.FloatingActionButton(text="Reset", width=150,expand=0, bgcolor="BLUE",height=50, on_click=reset_click, icon=ft.icons.RESTORE)
 
     # Container of buttons to be displayed at the bottom of the page
     bottom_buttons = ft.Row(controls =
-        [reset_button,submit_button], alignment=ft.MainAxisAlignment.SPACE_EVENLY)
+        [reset_button,submit_button], alignment=ft.MainAxisAlignment.CENTER, expand=0, spacing=20)
 
     # Text to be displayed above the list of words
     t = ft.Text(size=16, style=ft.TextThemeStyle.LABEL_MEDIUM,color=gray)
     t_row = ft.Row(controls=[t], alignment=ft.MainAxisAlignment.CENTER, expand=0)
 
     
-    page.add(c, e1, t_row, answers_list_view, bottom_buttons)
+    page.add(c, e1, t_row, alv_row, bottom_buttons)
 
 # Run the app in a web browser by adding the following line:
 # ft.app(target=main, view=ft.WEB_BROWSER)
