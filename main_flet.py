@@ -1,6 +1,12 @@
 # This is a web-version of the spelling bee helper built using Flet 
 import flet as ft
 
+# TODO: Add quit button
+# TODO: Add panagram checker, and make the panagram in the list, if found, a bold typeface
+# TODO: Add labeel below list view to source the dictionary
+# TODO: Save the list of words to a file with date and time
+# TODO: Add project as a webpage to portfolio website
+
 def main(page: ft.Page):
     # Title of page in center
     page.title = "Spelling Bee Helper"
