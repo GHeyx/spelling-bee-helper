@@ -3,8 +3,9 @@ import flet as ft
 
 # TODO: Add quit button
 # TODO: Add panagram checker, and make the panagram in the list, if found, a bold typeface
-# TODO: Add labeel below list view to source the dictionary
+# TODO: Add label below list view to source the dictionary
 # TODO: Save the list of words to a file with date and time
+# TODO: Save today's letters and words to a file with date and time to keep history
 # TODO: Add project as a webpage to portfolio website
 
 def main(page: ft.Page):
