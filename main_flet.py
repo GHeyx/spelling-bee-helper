@@ -22,10 +22,14 @@ def main(page: ft.Page):
     
     
     def submit_click(e):
-        entry1_value = user_input_letters.value.lower()
+        entry1_value = user_input_letters.value
+        count = len(e.control.value)
         is_set = sorted(set(user_input_letters.value)) == sorted(user_input_letters.value)
         if not is_set:
             user_input_letters.error_text = "Letters must be unique."
+            user_input_letters.focus()
+        elif count != 7:
+            user_input_letters.error_text = "7 letters required."
             user_input_letters.focus()
         else:
             get_solution(entry1_value)
