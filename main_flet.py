@@ -23,6 +23,18 @@ def main(page: ft.Page):
     
     def submit_click(e):
         entry1_value = user_input_letters.value.lower()
+        is_set = sorted(set(user_input_letters.value)) == sorted(user_input_letters.value)
+        if not is_set:
+            user_input_letters.error_text = "Letters must be unique."
+            user_input_letters.focus()
+        else:
+            get_solution(entry1_value)
+            submit_button.disabled = True
+            submit_button.bgcolor = gray
+                   
+        page.update()
+        
+    def get_solution(entry1_value):
         answers = find_words(entry1_value)
         amount_of_words = (len(answers))
         if amount_of_words == 0:
@@ -36,10 +48,6 @@ def main(page: ft.Page):
             else:
                 answers_list_view.controls.append(ft.Text(" " + i, size=16, style=ft.TextThemeStyle.LABEL_MEDIUM))
             page.update()
-        
-        
-            
-        page.update()
     
     # Submit Button clickable only when 7 characters are entered
     def text_changed(e):
@@ -47,6 +55,8 @@ def main(page: ft.Page):
         remaining = 7 - count
         t.value = (f"Letters Remaining:  {remaining} ")
         is_set = sorted(set(user_input_letters.value)) == sorted(user_input_letters.value)
+        answers_list_view.controls.clear()
+        user_input_letters.error_text = ""
         if count==7 and is_set:
             submit_button.disabled = False
             submit_button.bgcolor = ready_to_submit_color
@@ -58,12 +68,16 @@ def main(page: ft.Page):
     
     def reset_click(e):
         user_input_letters.value = ""
+        user_input_letters.error_text = ""
         t.value = ("")
         submit_button.disabled = True
         submit_button.bgcolor = "#C8C8C6"
         answers_list_view.controls.clear()
         user_input_letters.focus()
         page.update()
+    
+    def quit_click(e):
+        page.window_close()
     
     # Find words in the dictionary that contain the given letters
     def find_words(word):
@@ -113,8 +127,19 @@ def main(page: ft.Page):
     # List of words that contain the given letters to be displayed
     answers_list_view = ft.ListView(width=400, height=400)
     
+    # Textfield to get user input to add to the list of words
+    # on_change=text_changed, on_submit=submit_click,
+    # add_new_word_user_input = ft.TextField(label="Add a new word to the dictionary", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=350, max_length=7, text_align=ft.TextAlign.CENTER)
+    # # Button to submit user input
+    # add_button = ft.FloatingActionButton(text="Add", width=100,expand=0, bgcolor=gray, height=50, disabled=True, icon=ft.icons.UPCOMING)
+    
+    # # Button to reset user input and the list of words
+    # cancel_button = ft.FloatingActionButton(text="Cancel", width=100,expand=0, bgcolor="BLUE",height=50, disabled=True, icon=ft.icons.RESTORE)
+    
+    
     # Container of type row for list of words
     alv_row = ft.Row(controls=[answers_list_view], alignment=ft.MainAxisAlignment.CENTER, expand=0)
+    
     
     
     # Button to submit user input
@@ -122,10 +147,13 @@ def main(page: ft.Page):
     
     # Button to reset user input and the list of words
     reset_button = ft.FloatingActionButton(text="Reset", width=150,expand=0, bgcolor="BLUE",height=50, on_click=reset_click, icon=ft.icons.RESTORE)
+    
+    # Button to exit the app
+    quit_button = ft.FloatingActionButton(text="Quit", width=150,expand=0, bgcolor="RED",height=50, on_click=quit_click, icon=ft.icons.CLOSE)
 
     # Container of buttons to be displayed at the bottom of the page
     bottom_buttons = ft.Row(controls =
-        [reset_button,submit_button], alignment=ft.MainAxisAlignment.CENTER, expand=0, spacing=20)
+        [reset_button,submit_button,quit_button], alignment=ft.MainAxisAlignment.CENTER, expand=0, spacing=20)
 
     # Text to be displayed above the list of words
     t = ft.Text(size=16, style=ft.TextThemeStyle.LABEL_MEDIUM,color=gray)
