@@ -31,7 +31,10 @@ def main(page: ft.Page):
             t.value = (f"Here's what I found, " + str(amount_of_words) + " words: ")
         
         for i in sorted(answers):
-            answers_list_view.controls.append(ft.Text(" " + i, size=20, style=ft.TextThemeStyle.LABEL_MEDIUM))
+            if is_panagram(i):
+                answers_list_view.controls.append(ft.Text(" " + i, size=16, style=ft.TextThemeStyle.LABEL_MEDIUM, weight=ft.FontWeight.BOLD, color="YELLOW"))
+            else:
+                answers_list_view.controls.append(ft.Text(" " + i, size=16, style=ft.TextThemeStyle.LABEL_MEDIUM))
             page.update()
         
         
@@ -77,6 +80,13 @@ def main(page: ft.Page):
                 words.append(word)
         return words
     
+    def is_panagram(word):
+        letters_set = set(word)
+        if len(letters_set) == 7:
+            return True
+        else:
+            return False
+    
     # Automatically move to next text box when 1 character is entered, this is a future feature to mimic the behavior of a security code form that auto submits when all 7 boxes are filled
     def next_field(e):
         if len(e.control.value) == 1:
@@ -101,12 +111,14 @@ def main(page: ft.Page):
     
     # List of words that contain the given letters to be displayed
     answers_list_view = ft.ListView(width=400, height=400)
+    
     # Container of type row for list of words
     alv_row = ft.Row(controls=[answers_list_view], alignment=ft.MainAxisAlignment.CENTER, expand=0)
     
     
     # Button to submit user input
     submit_button = ft.FloatingActionButton(text="Submit", width=150,expand=0, bgcolor=gray, height=50, disabled=True, on_click=submit_click,icon=ft.icons.UPCOMING)
+    
     # Button to reset user input and the list of words
     reset_button = ft.FloatingActionButton(text="Reset", width=150,expand=0, bgcolor="BLUE",height=50, on_click=reset_click, icon=ft.icons.RESTORE)
 
