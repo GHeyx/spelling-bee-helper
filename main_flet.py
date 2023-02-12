@@ -46,7 +46,8 @@ def main(page: ft.Page):
         count = len(e.control.value)
         remaining = 7 - count
         t.value = (f"Letters Remaining:  {remaining} ")
-        if count==7:
+        is_set = sorted(set(user_input_letters.value)) == sorted(user_input_letters.value)
+        if count==7 and is_set:
             submit_button.disabled = False
             submit_button.bgcolor = ready_to_submit_color
             t.value = ("Ready to Submit! Hit Enter or click the button.")
