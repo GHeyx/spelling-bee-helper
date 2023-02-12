@@ -51,6 +51,8 @@ def main(page: ft.Page):
     
     # Submit Button clickable only when 7 characters are entered
     def text_changed(e):
+        # first_letter = ft.Ref[user_input_letters[0]].current
+        # first_letter.color = "YELLOW"
         count = len(e.control.value)
         remaining = 7 - count
         t.value = (f"Letters Remaining:  {remaining} ")
@@ -110,7 +112,7 @@ def main(page: ft.Page):
             e.control.focus()
         
     # Text box for user input
-    user_input_letters = ft.TextField(label="Begin Here", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=400, on_change=text_changed, on_submit=submit_click, max_length=7, content_padding=25, text_align=ft.TextAlign.CENTER)
+    user_input_letters = ft.TextField(label="Begin Here", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=400, on_change=text_changed, on_submit=submit_click, max_length=7, content_padding=25, text_align=ft.TextAlign.CENTER,color="WHITE")
     
     # Container type Row for text box
     e1 = ft.Row(controls=[user_input_letters], alignment=ft.MainAxisAlignment.CENTER, expand=0)
