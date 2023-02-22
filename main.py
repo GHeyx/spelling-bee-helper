@@ -35,7 +35,7 @@ def main(page: ft.Page):
             get_solution(entry1_value)
             submit_button.disabled = True
             submit_button.bgcolor = gray
-                   
+            page.add(ft.Divider(),snw_row)       
         page.update()
         
     def get_solution(entry1_value):
@@ -115,7 +115,20 @@ def main(page: ft.Page):
             e.control.next.focus()
         else:
             e.control.focus()
-        
+    
+    
+    # Functions for submitting a new word
+    def add_word_clicked(e):
+        # check if word contains only the given letters
+        # check if word is long enough
+        # check if word is already in dictionary
+        # add word to file with marker to indicate it is a user added word -> will be a different color in the list when displayed in the future
+        pass
+    def cancel_word_clicked(e):
+        # clear the text box
+        # remove the add word form
+        pass
+    
     # Text box for user input
     user_input_letters = ft.TextField(label="Begin Here", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=400, on_change=text_changed, on_submit=submit_click, max_length=7, content_padding=25, text_align=ft.TextAlign.CENTER,color="WHITE")
     
@@ -136,16 +149,19 @@ def main(page: ft.Page):
     
     # Textfield to get user input to add to the list of words
     # on_change=text_changed, on_submit=submit_click,
-    # add_new_word_user_input = ft.TextField(label="Add a new word to the dictionary", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=350, max_length=7, text_align=ft.TextAlign.CENTER)
-    # # Button to submit user input
-    # add_button = ft.FloatingActionButton(text="Add", width=100,expand=0, bgcolor=gray, height=50, disabled=True, icon=ft.icons.UPCOMING)
+    add_new_word_user_input = ft.TextField(label="Add a new word to the dictionary", hint_text="Created by Ernest", icon=ft.icons.EMOJI_EMOTIONS, capitalization=ft.TextCapitalization.CHARACTERS,width=350, text_align=ft.TextAlign.CENTER)
+    # Button to submit user input
+    add_button = ft.FloatingActionButton(text="Add", width=100,expand=0, bgcolor="BLUE", height=50, disabled=True, icon=ft.icons.UPCOMING)
     
-    # # Button to reset user input and the list of words
-    # cancel_button = ft.FloatingActionButton(text="Cancel", width=100,expand=0, bgcolor="BLUE",height=50, disabled=True, icon=ft.icons.RESTORE)
+    # Button to reset user input and the list of words
+    cancel_button = ft.FloatingActionButton(text="Cancel", width=100,expand=0, bgcolor="BLUE",height=50, disabled=True, icon=ft.icons.RESTORE)
     
     
     # Container of type row for list of words
     alv_row = ft.Row(controls=[answers_list_view], alignment=ft.MainAxisAlignment.CENTER, expand=0)
+    
+    # Container for submitting new words
+    snw_row = ft.Row(controls=[add_new_word_user_input,add_button,cancel_button], alignment=ft.MainAxisAlignment.CENTER, expand=0)
     
     
     
