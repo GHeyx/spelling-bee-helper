@@ -23,7 +23,7 @@ def main(page: ft.Page):
     
     def submit_click(e):
         entry1_value = user_input_letters.value
-        count = len(e.control.value)
+        count = len(entry1_value)
         is_set = sorted(set(user_input_letters.value)) == sorted(user_input_letters.value)
         if not is_set:
             user_input_letters.error_text = "Letters must be unique."
@@ -39,7 +39,8 @@ def main(page: ft.Page):
         page.update()
         
     def get_solution(entry1_value):
-        answers = find_words(entry1_value)
+        print("Getting solution for: " + entry1_value)
+        answers = find_words(entry1_value.lower())
         amount_of_words = (len(answers))
         if amount_of_words == 0:
             t.value = ("No words found.")
@@ -57,7 +58,7 @@ def main(page: ft.Page):
     def text_changed(e):
         # first_letter = ft.Ref[user_input_letters[0]].current
         # first_letter.color = "YELLOW"
-        count = len(e.control.value)
+        count = len(user_input_letters.value)
         remaining = 7 - count
         t.value = (f"Letters Remaining:  {remaining} ")
         is_set = sorted(set(user_input_letters.value)) == sorted(user_input_letters.value)
