@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import customtkinter
 
+#  This was the first iteration of this app using the customtkinter module
 customtkinter.set_appearance_mode('light')  
 customtkinter.set_default_color_theme('blue')
 
