@@ -35,7 +35,7 @@ def main(page: ft.Page):
             get_solution(entry1_value)
             submit_button.disabled = True
             submit_button.bgcolor = gray
-            page.add(ft.Divider(),snw_row)       
+            page.add(snw_row)      
         page.update()
         
     def get_solution(entry1_value):
@@ -56,7 +56,6 @@ def main(page: ft.Page):
     
     # Submit Button clickable only when 7 characters are entered
     def text_changed(e):
-        # first_letter = ft.Ref[user_input_letters[0]].current
         # first_letter.color = "YELLOW"
         count = len(user_input_letters.value)
         remaining = 7 - count
@@ -80,6 +79,7 @@ def main(page: ft.Page):
         submit_button.disabled = True
         submit_button.bgcolor = "#C8C8C6"
         answers_list_view.controls.clear()
+        page.remove(snw_row)
         user_input_letters.focus()
         page.update()
     
@@ -161,7 +161,7 @@ def main(page: ft.Page):
     alv_row = ft.Row(controls=[answers_list_view], alignment=ft.MainAxisAlignment.CENTER, expand=0)
     
     # Container for submitting new words
-    snw_row = ft.Row(controls=[add_new_word_user_input,add_button,cancel_button], alignment=ft.MainAxisAlignment.CENTER, expand=0)
+    snw_row = ft.Row(controls=[ft.Divider(),add_new_word_user_input,add_button,cancel_button], alignment=ft.MainAxisAlignment.CENTER, expand=0)
     
     
     
